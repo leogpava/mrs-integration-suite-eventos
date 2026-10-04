@@ -1,0 +1,8 @@
+# Credenciais e arquivos preenchidos localmente: nunca versionar
+*.local.json
+.env
+.env.*
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db

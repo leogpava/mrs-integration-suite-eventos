@@ -1,0 +1,98 @@
+{
+  "info": {
+    "_postman_id": "6f1c2a7e-3b9d-4c5e-8a10-00000000a001",
+    "name": "MRS · Chegada de Trem",
+    "description": "Chamadas ao iFlow Chegada_Trem_HTTPS do treinamento Integration Suite + Advanced Event Mesh (MRS). Autenticação OAuth 2.0 (Client Credentials) configurada no nível da collection.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      { "key": "grant_type", "value": "client_credentials", "type": "string" },
+      { "key": "accessTokenUrl", "value": "{{tokenurl}}", "type": "string" },
+      { "key": "clientId", "value": "{{clientid}}", "type": "string" },
+      { "key": "clientSecret", "value": "{{clientsecret}}", "type": "string" },
+      { "key": "client_authentication", "value": "header", "type": "string" },
+      { "key": "tokenName", "value": "MRS Token", "type": "string" },
+      { "key": "addTokenTo", "value": "header", "type": "string" }
+    ]
+  },
+  "item": [
+    {
+      "name": "Trem atrasado",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Header X-MRS-Classificacao existe\", function () {",
+              "    pm.response.to.have.header(\"X-MRS-Classificacao\");",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"trem\": \"1234\",\n  \"patio\": \"Juiz de Fora\",\n  \"previsto\": \"08:00\",\n  \"chegada\": \"08:47\",\n  \"status\": \"ATRASADO\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{url}}/http/mrs/{{iniciais}}/chegada",
+          "host": ["{{url}}"],
+          "path": ["http", "mrs", "{{iniciais}}", "chegada"]
+        },
+        "description": "Trem 1234 chega às 08:47, previsto para 08:00. Resposta esperada: X-MRS-Classificacao = ATRASADO."
+      },
+      "response": []
+    },
+    {
+      "name": "Trem no horário",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});",
+              "",
+              "pm.test(\"Header X-MRS-Classificacao existe\", function () {",
+              "    pm.response.to.have.header(\"X-MRS-Classificacao\");",
+              "});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"trem\": \"5678\",\n  \"patio\": \"Juiz de Fora\",\n  \"previsto\": \"09:00\",\n  \"chegada\": \"08:58\",\n  \"status\": \"NO_HORARIO\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": {
+          "raw": "{{url}}/http/mrs/{{iniciais}}/chegada",
+          "host": ["{{url}}"],
+          "path": ["http", "mrs", "{{iniciais}}", "chegada"]
+        },
+        "description": "Trem 5678 chega às 08:58, previsto para 09:00. Resposta esperada: X-MRS-Classificacao = NO_HORARIO."
+      },
+      "response": []
+    }
+  ]
+}

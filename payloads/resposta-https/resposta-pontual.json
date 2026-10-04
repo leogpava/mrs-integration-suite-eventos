@@ -1,0 +1,5 @@
+{
+  "classificacao": "NO_HORARIO",
+  "mensagem": "Trem ${property.trem} chegou em ${property.patio} às ${property.chegada}, dentro do previsto.",
+  "acao": "Nenhuma"
+}

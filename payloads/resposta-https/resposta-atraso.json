@@ -1,0 +1,5 @@
+{
+  "classificacao": "ATRASADO",
+  "mensagem": "Alerta: trem ${property.trem} chegou em ${property.patio} às ${property.chegada}. Previsto: ${property.previsto}.",
+  "acao": "Notificar cliente e planejamento"
+}

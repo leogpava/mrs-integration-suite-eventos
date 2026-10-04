@@ -1,0 +1,8 @@
+{
+  "evento": "TremNoHorario",
+  "trem": "${property.trem}",
+  "patio": "${property.patio}",
+  "previsto": "${property.previsto}",
+  "chegada": "${property.chegada}",
+  "mensagem": "Trem ${property.trem} chegou em ${property.patio} às ${property.chegada}, dentro do previsto."
+}
